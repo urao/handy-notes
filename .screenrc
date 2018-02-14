@@ -1,0 +1,37 @@
+escape `e
+
+# Change default scrollback value for new windows
+defscrollback 20000
+
+# Pretty status bar at the bottom
+caption always "%w"
+
+altscreen on
+hardstatus on
+hardstatus string " %{= kC}%-w%{.rW}%n %t%{-}%+w %=%{..C} %H %{..C} %m/%d "
+#hardstatus string '%{= kK}%-Lw%{= KW}%50>%n%f %t%{= kK}%+Lw%< %{=kG}%-= %d%M %c:%s%{-}'
+hardstatus alwayslastline
+#hardstatus alwayslastline "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%< %=%D %M %d %c"
+
+defutf8 on
+shelltitle ''
+vbell on
+autodetach on
+startup_message off
+term "screen-256color"
+# Make xterm scrolling work properly with screen.
+termcapinfo xterm-256color|xterm-color|xterm|xterms|xs|rxvt ti@:te@
+
+# Bind C-a v to copy buffer to Mac OS X clipboard.
+bind v eval "writebuf" "exec sh -c 'pbcopy < /tmp/screen-exchange'"
+
+bind p command -c paste_class
+bind -c paste_class 1 paste 1
+bind -c paste_class 2 paste 2
+bind -c paste_class 3 paste 3
+bind -c paste_class 4 paste 4
+bind -c paste_class 5 paste 5
+bind -c paste_class 6 paste 6
+bind -c paste_class 7 paste 7
+bind -c paste_class 8 paste 8
+bind -c paste_class 9 paste 9
