@@ -1,0 +1,13 @@
+      
+      # Steps to create pool-storage if you are running out of space in /
+      mkdir -p /home/images
+      chown root:root /home/images
+      virsh pool-define-as home_images --type dir --target /home/images/
+      virsh pool-start home_images
+      virsh pool-list
+      virsh pool-autostart home_images
+      # For each VM:
+      #    virsh destroy $vm
+      #    mv /var/lib/libvirt/images/${vm}.qcow2 /home/images/
+      #    ln -s /home/images/${vm}.qcow2 /var/lib/libvirt/images/${vm}.qcow2
+      #    virsh start $vm
