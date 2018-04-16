@@ -3,3 +3,11 @@ Edit file /etc/default/grub
 Change GRUB_CMDLINE_LINUX=”rd.lvm.lv=rootvg/usrlv rd.lvm.lv=rootvg/swaplv crashkernel=auto vconsole.keymap=us rd.lvm.lv=rootvg/rootlv vconsole.font=latarcyrheb-sun16 rhgb quiet net.ifnames=0 biosdevname=0“
 grub2-mkconfig -o /boot/grub2/grub.cfg
 Update names of the network-scripts.
+
+
+# Ubuntu 16.04
+Add net.ifnames=0 to boot parameters
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash net.ifnames=0"
+
+Update grub
+sudo update-grub
