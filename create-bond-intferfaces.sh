@@ -10,6 +10,7 @@ function create_bond_on_ubuntu () {
 }
 
 function create_bond_on_centos () {
+   yum install -y lshw pciutils net-tools
    echo "Creating bond interfaces on centos"
    sudo lsmod | grep bonding >& /dev/null
    if [ $? -eq 0 ]
