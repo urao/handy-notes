@@ -1,12 +1,50 @@
 #!/usr/bin/env bash
-# Tested on centos 7.4
+# Tested on centos 7.4 and Ubuntu 16.04.2
 
 set -e
 
 EXITCODE=0
 
 function create_bond_on_ubuntu () {
-        echo "Work in progess!!"
+   apt install -y lshw
+   echo "Creating bond interfaces on Ubuntu"
+   sudo lsmod | grep bonding >& /dev/null
+   if [ $? -eq 0 ]
+   then 
+      echo "Bonding module already loaded"
+   else
+      echo "Bonding module is not loaded"
+      sudo modprobe bonding
+   fi
+   echo "bonding" >> /etc/modules
+   echo
+   echo "Updating interfaces file"
+   echo
+   cat << EOF > /etc/network/interfaces
+auto $1
+iface $1 inet manual
+    bond-master $3
+
+auto $2
+iface $2 inet manual
+    bond-master $3
+
+auto $3
+iface $3 inet static
+    address $4
+    netmask $4
+    bond-mode 4
+    bond-miimon 100
+    bond-slaves $1 $2
+EOF
+   echo "Creation of the interface configuration files is done!!"
+   echo
+   echo "Bring up interfaces now!"
+   sudo ifconfig $1 down && ifconfig $2 down && ifconfig $3 down
+   sudo ifconfig $1 up && ifconfig $2 up && ifconfig $3 up
+   echo -e "Output of ifconfig \n"
+   ifconfig
+   echo -e "Done !!!! \n\n"
 }
 
 function create_bond_on_centos () {
