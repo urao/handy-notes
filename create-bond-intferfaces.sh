@@ -16,6 +16,9 @@ function create_bond_on_ubuntu () {
       echo "Bonding module is not loaded"
       sudo modprobe bonding
    fi
+   echo "loop" >> /etc/modules
+   echo "lp" >> /etc/modules
+   echo "rtc" >> /etc/modules
    echo "bonding" >> /etc/modules
    echo
    echo "Updating interfaces file"
@@ -24,6 +27,7 @@ function create_bond_on_ubuntu () {
 auto $1
 iface $1 inet manual
     bond-master $3
+    bond-primary $1
 
 auto $2
 iface $2 inet manual
@@ -35,7 +39,7 @@ iface $3 inet static
     netmask $4
     bond-mode 4
     bond-miimon 100
-    bond-slaves $1 $2
+    bond-slaves none
 EOF
    echo "Creation of the interface configuration files is done!!"
    echo
