@@ -6,11 +6,9 @@ set -e
 EXITCODE=0
 
 function create_bond_on_ubuntu () {
-   apt install -y lshw
+   apt install -y lshw ifenslave
    echo "Creating bond interfaces on Ubuntu"
-   sudo lsmod | grep bonding >& /dev/null
-   if [ $? -eq 0 ]
-   then 
+   if lsmod | grep bond; then
       echo "Bonding module already loaded"
    else
       echo "Bonding module is not loaded"
@@ -55,8 +53,7 @@ function create_bond_on_centos () {
    yum install -y lshw pciutils net-tools
    echo "Creating bond interfaces on centos"
    sudo lsmod | grep bonding >& /dev/null
-   if [ $? -eq 0 ]
-   then 
+   if lsmod | grep bond; then
       echo "Bonding module already loaded"
    else
       echo "Bonding module is not loaded"
