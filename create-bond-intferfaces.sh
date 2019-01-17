@@ -116,7 +116,7 @@ read -p 'Interface 0: ' intf1
 read -p 'Interface 1: ' intf2
 read -p 'Bond interface name: ' bondIntfName
 read -p 'Bond interface IP Address: ' bondIp
-read -p 'Bond interface SubNetMask: ' bondSubnet
+read -p 'Bond interface Prefix: ' bondSubnet
 
 if [ -f /etc/lsb-release ]; then
    create_bond_on_ubuntu $intf1 $intf2 $bondIntfName $bondIp $bondSubnet
