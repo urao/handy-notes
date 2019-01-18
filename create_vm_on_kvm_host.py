@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Tested on Centos 7.4, works without changes for creating RHEL VMs
+# Tested on Centos 7.4, 
 # Before you run this script, install KVM packages using script
 # https://github.com/urao/docker-k8s-project/blob/master/install_kvm.sh
 # Example
@@ -46,6 +46,7 @@ class BuildVM(object):
         command += " " + vm_name + " " + '--hostname' + " "+str(self.opt.vm_name)
         command += " " + '--timezone America/Los_Angeles --run-command \'xfs_growfs /\' --root-password'
         command += " " + 'password:' + str(self.opt.vm_passwd) 
+        command += " " + '--run-command \'sed -i "s/#UseDNS yes/UseDNS no/g" /etc/ssh/sshd_config'
         command += " " + '--run-command \'sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/g"'
         command += " " + '/etc/ssh/sshd_config\' --run-command \'systemctl enable sshd\' --run-command \'yum remove -y cloud-init\' --selinux-relabel' 
         execute(command, f, ignore_errors=False)
