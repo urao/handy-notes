@@ -1,9 +1,9 @@
 #!/usr/bin/env python
-# Tested on Centos 7.4, 
+# Tested on Centos 7.4 
 # Before you run this script, install KVM packages using script
 # https://github.com/urao/docker-k8s-project/blob/master/install_kvm.sh
 # Example
-# python create_vm_on_kvm_host.py -i rhel-server-7.5-x86_64-kvm.qcow2 -s 50G -n pp02 -p contrail123 -c 4 -r 32764 create
+# python create_vm_on_kvm_host.py -i rhel-server-7.5-x86_64-kvm.qcow2 -s 50G -n pp02 -p contrail123 -c 4 -o centos -r 32764 create
 # python create_vm_on_kvm_host.py -n pp01 delete
 
 import sys
@@ -44,8 +44,10 @@ class BuildVM(object):
         print 'Running virt-customize..'
         command = 'virt-customize -a'
         command += " " + vm_name + " " + '--hostname' + " "+str(self.opt.vm_name)
-        command += " " + '--timezone America/Los_Angeles --run-command \'xfs_growfs /\' --root-password'
-        command += " " + 'password:' + str(self.opt.vm_passwd) 
+        command += " " + '--timezone America/Los_Angeles'
+        if str(self.opt.os_name) is 'rhel':
+           command += " " + '--run-command \'xfs_growfs /\''
+        command += " " + '--root-password password:' + str(self.opt.vm_passwd)
         command += " " + '--run-command \'sed -i "s/#UseDNS yes/UseDNS no/g" /etc/ssh/sshd_config'
         command += " " + '--run-command \'sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/g"'
         command += " " + '/etc/ssh/sshd_config\' --run-command \'systemctl enable sshd\' --run-command \'yum remove -y cloud-init\' --selinux-relabel' 
@@ -61,7 +63,10 @@ class BuildVM(object):
         command += " " + '--name' + " "+str(self.opt.vm_name)
         command += " " + '--ram' + " "+str(self.opt.vm_mem)
         command += " " + '--vcpus' + " "+str(self.opt.vm_cpus)
-        command += " " + '--os-variant rhel7'
+        if str(self.opt.os_name) is 'rhel':
+           command += " " + '--os-variant rhel7'
+        else:
+           command += " " + '--os-variant centos7.0'
         command += " " + '--disk ' + '/var/lib/libvirt/images/'+vm_name 
         command += " " + '--network network=default,model=virtio'
         command += " " + '--virt-type kvm --import --graphics vnc --serial pty --noautoconsole' 
@@ -138,6 +143,9 @@ def parse_options(args):
 
     parser.add_argument('-r', '--ram', nargs='?', dest='vm_mem',
                         help='Memory of the VM.')
+
+    parser.add_argument('-o', '--os', nargs='?', dest='os_name',
+                        help='OS of the VM.')
 
     subparsers = parser.add_subparsers(title='BuildVM Commands',
                                       description='Select one action',
