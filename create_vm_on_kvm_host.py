@@ -3,7 +3,7 @@
 # Before you run this script, install KVM packages using script
 # https://github.com/urao/docker-k8s-project/blob/master/install_kvm.sh
 # Example
-# python create_vm_on_kvm_host.py -i rhel-server-7.5-x86_64-kvm.qcow2 -s 50G -n pp02 -p contrail123 -c 4 -o centos -r 32764 create
+# python create_vm_on_kvm_host.py -i rhel-server-7.5-x86_64-kvm.qcow2 -s 50G -n pp02 -p contrail123 -c 4 -o rhel -r 32764 create
 # python create_vm_on_kvm_host.py -n pp01 delete
 
 import sys
