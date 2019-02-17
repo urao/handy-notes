@@ -1,2 +1,2 @@
-# day2day-act
-commands to accomplish 
+# handy-notes
+commands to accomplish daily tasks
