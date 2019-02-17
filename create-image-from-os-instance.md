@@ -1,4 +1,5 @@
 ## Steps to create an image from OpenStack instance
+0) RUN, source /etc/kolla/kolla-toolbox/admin-openrc.sh
 1) openstack server list
 2) openstack server stop <instance_name>
 3) nova image-create --poll <instance_name> <instance_name_snapshot>
