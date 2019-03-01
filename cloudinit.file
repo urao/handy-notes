@@ -1,4 +1,21 @@
+cat <<EOF > user-data
 #cloud-config
-password: contrail123
-chpasswd: { expire: False }
+disable_root: false
+manage_etc_hosts: false
+chpasswd:
+  list: |
+    root:contrail123
+    ubuntu:ubuntu
+  expire: False
 ssh_pwauth: True
+final_message: "The system is finally up, after $UPTIME seconds"
+
+groups:
+  - cloud-users
+users:
+  - default
+runcmd:
+  - touch /etc/cloud/cloud-init.disabled
+  - sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config
+  - service ssh restart
+EOF
