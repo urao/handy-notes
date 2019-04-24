@@ -178,7 +178,7 @@ if __name__=='__main__':
         print "Missing virt-install command"
         sys.exit(1)
 
-    if not cmd_exists("virsh list --all"):
+    if not cmd_exists("virsh"):
         print "Missing virsh command"
         sys.exit(1)
 
