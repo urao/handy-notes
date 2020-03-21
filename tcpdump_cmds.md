@@ -9,4 +9,6 @@ tcpdump  -evni eth1 "tcp and port 5269" -A
 tcpdump -ni eth0 udp port 4789 -c 10
 sudo tcpdump -ni vlan151 -e icmp6
 sudo tcpdump -eni vnet1 udp
+tcpdump -vnei ens3f1 "udp and port 4789"
+tcpdump -nnei eth0 -vvv
 ```
