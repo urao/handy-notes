@@ -6,3 +6,8 @@ ip -6 neighbor show
 tailf /var/log/nova/nova-scheduler.log | grep  "not match requested node"
 sudo sysctl –p /etc/sysctl.conf
 ```
+
+Shorten encryption to fix SSH connectivity issues
+```
+ssh -o MACs=hmac-sha2-256 root@192.168.10.5
+```
