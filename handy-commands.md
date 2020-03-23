@@ -1,5 +1,6 @@
 ```
 ansible localhost -m setup
+ansible all -i inventory/demo.ini -m ping
 scp -6 root@\[ffee:40b::10\]:/home/stack/images/overcloud-full.qcow2 .
 %!python -mjson.tool
 ip -6 neighbor show
