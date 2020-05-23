@@ -1,0 +1,9 @@
+[Journal]
+
+Storage=persistent
+
+MaxFileSec=1week
+
+SystemMaxFileSize=1G
+
+SystemMaxUs=20G
