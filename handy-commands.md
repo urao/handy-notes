@@ -14,5 +14,10 @@ ssh -o MACs=hmac-sha2-256 root@192.168.10.5
 ```
 ```
 SSH to all the hosts and execute a specific command:
-for i in `cat hosts` ; do echo $i; ssh -l root -oStrictHostKeyChecking=no $i "sudo journalctl -t kernel | grep vrouter"; done
+for i in `cat hosts` ; do echo $i; ssh -l root -oStrictHostKeyChecking=no \
+      $i "sudo journalctl -t kernel | grep vrouter"; done
+```
+
+```
+docker inspect aae5cbb9be28 | jq '.[].LogPath' | sed -e 's/^"//' -e 's/"$//'
 ```
