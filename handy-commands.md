@@ -1,3 +1,5 @@
+
+#### commands
 ```
 ansible localhost -m setup
 ansible all -i inventory/demo.ini -m ping
@@ -20,4 +22,14 @@ for i in `cat hosts` ; do echo $i; ssh -l root -oStrictHostKeyChecking=no \
 
 ```
 docker inspect aae5cbb9be28 | jq '.[].LogPath' | sed -e 's/^"//' -e 's/"$//'
+```
+
+#### while loop
+```
+while true; do echo "Keep printing"; sleep 3; done
+```
+
+#### command to check parent PID
+```
+ps jfx
 ```
