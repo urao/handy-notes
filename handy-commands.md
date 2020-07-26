@@ -33,3 +33,9 @@ while true; do echo "Keep printing"; sleep 3; done
 ```
 ps jfx
 ```
+
+#### ping a host with timestamp
+```
+ping <host_ip_fqdn> | xargs -L 1 -I '{}' date '+%Y-%m-%d %H:%M:%S: {}' | tee ping_output.txt
+ping <host_ip_fqdn> | xargs -L 1 -I '{}' date '+%Y-%m-%d %H:%M:%S: {}' > ping_output.txt &
+```
