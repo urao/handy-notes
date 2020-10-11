@@ -39,3 +39,9 @@ ps jfx
 ping <host_ip_fqdn> | xargs -L 1 -I '{}' date '+%Y-%m-%d %H:%M:%S: {}' | tee ping_output.txt
 ping <host_ip_fqdn> | xargs -L 1 -I '{}' date '+%Y-%m-%d %H:%M:%S: {}' > ping_output.txt &
 ```
+
+#### Capture MPLSoUDP packets
+```
+tshark -I eth1 -V udp and host 10.1.1.5 | egrep “MPLS Label|Internet Protocol|UDP”
+tcpdump -i ens3f1 -nn udp
+```
