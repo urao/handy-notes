@@ -45,3 +45,8 @@ ping <host_ip_fqdn> | xargs -L 1 -I '{}' date '+%Y-%m-%d %H:%M:%S: {}' > ping_ou
 tshark -I eth1 -V udp and host 10.1.1.5 | egrep “MPLS Label|Internet Protocol|UDP”
 tcpdump -i enp0s3 -nn udp port 6635 
 ```
+
+#### Convert JSON input to single line JSON to provide as payload to curl command
+```
+awk -v RS= '{$1=$1}1' host.json 
+```
