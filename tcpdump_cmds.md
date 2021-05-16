@@ -11,4 +11,5 @@ sudo tcpdump -ni vlan151 -e icmp6
 sudo tcpdump -eni vnet1 udp
 tcpdump -vnei ens3f1 "udp and port 4789"
 tcpdump -nnei eth0 -vvv
+sudo tcpdump -i en0 -s 0 -A 'tcp[((tcp[12:1] & 0xf0) >> 2):4] = 0x504F5354' << capture GET/POST messages
 ```
