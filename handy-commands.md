@@ -48,5 +48,11 @@ tcpdump -i enp0s3 -nn udp port 6635
 
 #### Convert JSON input to single line JSON to provide as payload to curl command
 ```
-awk -v RS= '{$1=$1}1' host.json 
+awk -v RS= '{$1=$1}1' host.json
+cat host.json | jq -c .
+```
+
+#### NC
+```
+nc -z -v 10.10.8.8 20-80 2>&1 | grep succeeded
 ```
