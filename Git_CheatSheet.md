@@ -12,6 +12,8 @@ git remote add origin git@github.com:user/repo.git
 ```
 git pull origin main
 git branch <branch_name>
+git branch 
+git checkout <branch_name>
 git commit -a
 git push origin <branch_name>
 ```
