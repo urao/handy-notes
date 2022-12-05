@@ -20,4 +20,5 @@ git push origin <branch_name>
 
 ```
 PR is created and merge can be done in the github page
+git log
 ```
