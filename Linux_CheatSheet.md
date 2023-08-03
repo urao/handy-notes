@@ -8,3 +8,6 @@ tar -T <filename> -czvf archive.tgz
 ```
 fallocate -l 10G tmp_file.img
 ```
+```
+cat /dev/zero > /var/log/application.log
+```
