@@ -1,4 +1,4 @@
-### Useful commands
+### Useful TCPDUMP Commands
 ```
 tcpdump -i em0 "icmp[0] == 8"
 tcpdump -i eth0 "icmp6 && ip6[40] == 128"
@@ -14,4 +14,9 @@ tcpdump -vnei ens3f1 proto gre
 tcpdump -nnei eth0 -vvv
 sudo tcpdump -i en0 -s 0 -A 'tcp[((tcp[12:1] & 0xf0) >> 2):4] = 0x504F5354' << capture GET/POST messages
 sudo tcpdump -nnAs0 -i eth0 port 514 | grep -C 10 -i <pattern>
+```
+
+```
+Capture Syslog packets
+tcpdump -nnAs0 -i ens224 host 192.168.200.251 and port 514
 ```
